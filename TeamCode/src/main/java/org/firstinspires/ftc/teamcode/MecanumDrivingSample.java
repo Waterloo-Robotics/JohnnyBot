@@ -4,11 +4,16 @@ import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp
 public class MecanumDrivingSample extends LinearOpMode {
+    public static RevHubOrientationOnRobot.LogoFacingDirection LOGO_FACING_DIR =
+            RevHubOrientationOnRobot.LogoFacingDirection.UP;
+    public static RevHubOrientationOnRobot.UsbFacingDirection USB_FACING_DIR =
+            RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
 
     // This variable determines whether the following program
     // uses field-centric or robot-centric driving styles. The
@@ -21,10 +26,10 @@ public class MecanumDrivingSample extends LinearOpMode {
         // constructor takes in frontLeft, frontRight, backLeft, backRight motors
         // IN THAT ORDER
         MecanumDrive drive = new MecanumDrive(
-            new Motor(hardwareMap, "frontLeft", Motor.GoBILDA.RPM_435),
-            new Motor(hardwareMap, "frontRight", Motor.GoBILDA.RPM_435),
-            new Motor(hardwareMap, "backLeft", Motor.GoBILDA.RPM_435),
-            new Motor(hardwareMap, "backRight", Motor.GoBILDA.RPM_435)
+            new Motor(hardwareMap, "fl", Motor.GoBILDA.RPM_435),
+            new Motor(hardwareMap, "fr", Motor.GoBILDA.RPM_435),
+            new Motor(hardwareMap, "bl", Motor.GoBILDA.RPM_435),
+            new Motor(hardwareMap, "br", Motor.GoBILDA.RPM_435)
         );
 
         // This is the built-in IMU in the REV hub.

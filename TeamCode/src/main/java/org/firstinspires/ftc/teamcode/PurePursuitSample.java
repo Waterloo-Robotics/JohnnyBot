@@ -14,14 +14,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @Autonomous
-@Disabled
+//@Disabled
 public class PurePursuitSample extends CommandOpMode {
 
     // define our constants
-    static final double TRACKWIDTH = 13.7;
-    static final double WHEEL_DIAMETER = 4.0;    // inches
+    static final double TRACKWIDTH = 12.0;
+    static final double WHEEL_DIAMETER = 35.00 / 25.4;    // inches
     static double TICKS_TO_INCHES;
-    static final double CENTER_WHEEL_OFFSET = 2.4;
+    static final double CENTER_WHEEL_OFFSET = -6.25;
 
     private HolonomicOdometry m_robotOdometry;
     private OdometrySubsystem m_odometry;
@@ -32,17 +32,17 @@ public class PurePursuitSample extends CommandOpMode {
 
     @Override
     public void initialize() {
-        fL = new Motor(hardwareMap, "frontLeft");
-        fR = new Motor(hardwareMap, "frontRight");
-        bL = new Motor(hardwareMap, "backLeft");
-        bR = new Motor(hardwareMap, "backRight");
+        fL = new Motor(hardwareMap, "fl");
+        fR = new Motor(hardwareMap, "fr");
+        bL = new Motor(hardwareMap, "bl");
+        bR = new Motor(hardwareMap, "br");
 
         // create our drive object
         m_robotDrive = new MecanumDrive(fL, fR, bL, bR);
 
-        leftEncoder = new MotorEx(hardwareMap, "leftEncoder");
-        rightEncoder = new MotorEx(hardwareMap, "rightEncoder");
-        centerEncoder = new MotorEx(hardwareMap, "centerEncoder");
+        leftEncoder = new MotorEx(hardwareMap, "fl");
+        rightEncoder = new MotorEx(hardwareMap, "fr");
+        centerEncoder = new MotorEx(hardwareMap, "bl");
 
         // calculate multiplier
         TICKS_TO_INCHES = WHEEL_DIAMETER * Math.PI / leftEncoder.getCPR();

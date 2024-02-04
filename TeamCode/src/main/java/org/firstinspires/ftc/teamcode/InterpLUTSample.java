@@ -11,12 +11,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "LUT Sample")
+@TeleOp(name = "sLUT Sample")
 @Disabled
 public class InterpLUTSample extends LinearOpMode {
 
     // our lookup table of distances from the goal and respective speeds of the shooter
-    InterpLUT lut;
+    InterpLUT slut;
 
     private HolonomicOdometry odometry;
     private MotorEx leftEncoder, rightEncoder, perpEncoder;
@@ -27,13 +27,13 @@ public class InterpLUTSample extends LinearOpMode {
         shooter = new Motor(hardwareMap, "shooter");
 
         //Adding each val with a key
-        lut.add(5, 1);
-        lut.add(4.1, 0.9);
-        lut.add(3.6, 0.75);
-        lut.add(2.7, .5);
-        lut.add(1.1, 0.2);
+        slut.add(5, 1);
+        slut.add(4.1, 0.9);
+        slut.add(3.6, 0.75);
+        slut.add(2.7, .5);
+        slut.add(1.1, 0.2);
         //generating final equation
-        lut.createLUT();
+        slut.createLUT();
 
         leftEncoder = new MotorEx(hardwareMap, "left");
         rightEncoder = new MotorEx(hardwareMap, "right");
@@ -63,7 +63,7 @@ public class InterpLUTSample extends LinearOpMode {
         while (opModeIsActive() && !isStopRequested()) {
             if (gamepad1.a) {
                 double distance = odometry.getPose().getTranslation().getDistance(new Translation2d(5, 10));
-                shooter.set(lut.get(distance));
+                shooter.set(slut.get(distance));
             }
             odometry.updatePose();
         }
